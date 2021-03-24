@@ -44,9 +44,9 @@ class Graph:
             top=self.arr[y-1][x]
         
         if x==0:
-            right=-1
+            left=-1
         else:
-            right=self.arr[y][x-1]
+            left=self.arr[y][x-1]
 
         if y==self.height-1:
             bottom=-1
@@ -54,13 +54,20 @@ class Graph:
             bottom=self.arr[y+1][x]
         
         if x==self.breadth-1:
-            left=-1
+            right=-1
         else:
-            left=self.arr[y][x+1]
+            right=self.arr[y][x+1]
 
-        return [top, left, bottom, right]
+        return [top, right, bottom, left]
 
-    
+    def make_graph((y,x),sv):
+        top,right,bottom,left=sv 
+        if top!=255 and left!=255:
+            pass
+
+
+
+
 
     def detect_nodes(self):  
 
