@@ -20,6 +20,7 @@ class Graph:
         self.height=len(self.arr)
         self.breadth=len(self.arr[0])
         self.nodes=[]
+        self.graph=[]
 
     def check_for_node(self,sv,y,x):
         if y==0 or y==self.height-1:
@@ -60,10 +61,57 @@ class Graph:
 
         return [top, right, bottom, left]
 
-    def make_graph((y,x),sv):
-        top,right,bottom,left=sv 
+
+    def make_graph(self,node):
+        ind=self.nodes.index(node)
+        y,x=node.get_pos()
+        top,_,_,left=node.get_side_values() 
+        self.graph.append([ind])
         if top!=255 and left!=255:
             pass
+        else:
+            temp=0
+            if top==255:
+                k=y-1
+                while k>=0:
+                    
+                    for n in range(ind):
+                        if (k,x)==self.nodes[n].get_pos():
+                            self.graph[n].append(ind)
+                            self.graph[-1].append(n)
+                            """if ind==8 or ind==1:
+                                print(self.graph[8])"""
+                            temp=1
+                            break
+                    if temp==1:
+                        break
+                    k-=1
+                            
+                
+                        
+                
+
+            temp=0
+            if left==255:
+                k=x-1
+                while k>=0:
+                    
+                    for n in range(ind):
+                        if (y,k)==self.nodes[n].get_pos():
+                            self.graph[n].append(ind)
+                            self.graph[-1].append(n)
+                            """if ind==9 or ind==1:
+                                print(self.graph[9])"""
+                            temp=1
+                            break
+                    if temp==1:
+                        break
+                    k-=1
+
+                            
+
+
+            
 
 
 
@@ -78,6 +126,8 @@ class Graph:
                     sv=self.side_values(y,x)
                     if self.check_for_node(sv,y,x):
                         self.nodes.append(Node((y,x),sv))
+                        self.make_graph(self.nodes[-1])
+
 
         
         return self.nodes
@@ -86,8 +136,14 @@ class Graph:
 pic='demo_maze.jpg'
 gr=Graph(pic)
 k=gr.detect_nodes()
-for ki in k:
+"""for ki in k:
     print(ki.get_pos(),end=",")
+print(k[1].get_side_values())
+
+print(k[2].get_side_values())
 
 print()
-print(len(k))
+print(len(k))"""
+
+for g in gr.graph:
+    print(g)
