@@ -23,6 +23,7 @@ class Graph:
         self.arr=arr          
         self.height=len(self.arr)
         self.breadth=len(self.arr[0])
+        self.no_of_nodes=0
         
 
     def check_for_node(self,sv,y,x):
@@ -30,8 +31,11 @@ class Graph:
             return True
 
         c=sv.count(255)
-        if c>=3 or c==1:
+        if c==3 or c==1:
             return True
+        
+        if c==4:
+            return False
 
         fi=sv.index(255)
         if sv[fi-1]==255 or sv[fi+1]==255:
@@ -133,6 +137,7 @@ class Graph:
                         if y==self.height-1:
                             self.end_node=len(self.nodes)-1
                         self.make_graph(self.nodes[-1])
+                        self.no_of_nodes+=1
 
 
     def decode_node(self,directions):

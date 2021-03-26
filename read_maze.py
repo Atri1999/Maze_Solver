@@ -5,6 +5,12 @@ class Maze:
     def __init__(self,pic):
         self.pic=pic
         self.image=cv.imread(pic)
+    
+    def set_result_name(self):
+        name_list=list(self.pic.split("."))
+
+        name=f"{name_list[0]}_result.{name_list[1]}"
+        return name
 
     def maze_to_array(self):
         #image=cv.imread(pic)
@@ -20,9 +26,9 @@ class Maze:
 
     def write_on_maze(self,arr):
         for ind in range(1,len(arr)):
-            cv.line(self.image,(arr[ind-1][1],arr[ind-1][0]),(arr[ind][1],arr[ind][0]),(111,111,111),thickness=1)
+            cv.line(self.image,(arr[ind-1][1],arr[ind-1][0]),(arr[ind][1],arr[ind][0]),(1,0,111),thickness=5)
         
-        cv.imwrite("maze_result.jpg",self.image)
+        cv.imwrite(self.set_result_name(),self.image)
 
 
 #pic='demo_maze.jpg'
